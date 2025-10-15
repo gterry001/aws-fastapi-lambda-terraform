@@ -23,20 +23,16 @@ This project showcases how to deploy a FastAPI backend and a Worker Lambda fully
 ## How to Deploy
 
 1. Clone this repository
-   ´´´bash
    git clone https://github.com/gterry001/aws-fastapi-lambda-terraform.git
    cd aws-fastapi-lambda-terraform/infrastructure
 
 3. Initialize Terraform:
-´´´bash
    terraform init
 
 4. Apply:
-´´´bash
    terraform apply -auto-approve
 
 5. Output:
-´´´bash
    terraform output
 
 ## Highlights
