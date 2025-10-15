@@ -38,3 +38,16 @@ This project showcases how to deploy a FastAPI backend and a Worker Lambda fully
 4. Output:
 
    terraform output
+
+## Highlights
+
+1. Clean modular Terraform setup.
+2. Secure IAM roles with least privilege.
+3. ECR repositories automatically configured for Lambda.
+4. CodeBuild pipelines for Docker image build and push.
+5. Example Python code for FastAPI and worker processing.
+
+## Author
+
+Guillermo Terry de Loredo
+Cloud Engineer | AWS | Terraform | Python | FastAPI
