@@ -1,10 +1,10 @@
-# FastAPI + AWS Lambda + Terraform Deployment
+# 🚀 FastAPI + AWS Lambda + Terraform Deployment
 
 This project showcases how to deploy a **FastAPI backend** and a **Worker Lambda** fully serverless on AWS using **Terraform** as Infrastructure as Code.
 
 ---
 
-## Architecture
+## 🧱 Architecture
 
 - **FastAPI Lambda**: serves HTTP requests through API Gateway.
 - **Worker Lambda**: consumes messages from SQS and processes data.
@@ -16,7 +16,7 @@ This project showcases how to deploy a **FastAPI backend** and a **Worker Lambda
 
 ---
 
-##  Tech Stack
+## 🛠️ Tech Stack
 
 - **AWS Lambda (Container Images)**
 - **AWS ECR, S3, SQS, API Gateway**
@@ -26,29 +26,23 @@ This project showcases how to deploy a **FastAPI backend** and a **Worker Lambda
 
 ---
 
-## How to Deploy
+## 🚀 How to Deploy
 
-1.  Clone this repository:
-   ```bash
+1. Clone this repository:
+
    git clone https://github.com/<tu-usuario>/aws-fastapi-lambda-terraform.git
    cd aws-fastapi-lambda-terraform/infrastructure
 
-2.  Initialize Terraform
-  terraform init
+2. Initialize Terraform:
 
-3.  Apply => It is necessary to change the variables so it refers to your actual lambda images and website
+terraform init
+
+
+3. Apply:
+
 terraform apply -auto-approve
 
-4.  Output
-  terraform output
----
-## Folder structure
 
-| Folder            | Description                          |
-| ----------------- | ------------------------------------ |
-| `infrastructure/` | Terraform configuration              |
-| `lambda_fastapi/` | FastAPI handler Lambda (API Gateway) |
-| `lambda_worker/`  | Worker Lambda (SQS consumer)         |
-| `docs/`           | Diagrams and documentation           |
+4. Output:
 
-
+terraform output
