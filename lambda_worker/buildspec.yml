@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Logueando en Amazon ECR..."
+      - aws --version
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - IMAGE_TAG=latest
+  build:
+    commands:
+      - echo "Construyendo la imagen de Docker..."
+      - docker build -t $IMAGE_URI:$IMAGE_TAG .
+  post_build:
+    commands:
+      - echo "Subiendo la imagen a ECR..."
+      - docker push $IMAGE_URI:$IMAGE_TAG
+      - echo "Escribiendo imagen a imagedefinitions.json..."
+      - printf '[{"name":"myproject-lambda","imageUri":"%s"}]' $IMAGE_URI:$IMAGE_TAG > imagedefinitions.json
+
+artifacts:
+  files: imagedefinitions.json 
