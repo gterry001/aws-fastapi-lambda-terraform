@@ -41,7 +41,7 @@ terraform apply -auto-approve
 
 4.  Output
   terraform output
-
+---
 ## Folder structure
 
 | Folder            | Description                          |
