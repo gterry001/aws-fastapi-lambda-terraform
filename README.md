@@ -1,10 +1,9 @@
-# 🚀 FastAPI + AWS Lambda + Terraform Deployment
+# FastAPI + AWS Lambda + Terraform Deployment
 
 This project showcases how to deploy a **FastAPI backend** and a **Worker Lambda** fully serverless on AWS using **Terraform** as Infrastructure as Code.
 
----
 
-## 🧱 Architecture
+## Architecture
 
 - **FastAPI Lambda**: serves HTTP requests through API Gateway.
 - **Worker Lambda**: consumes messages from SQS and processes data.
@@ -12,9 +11,6 @@ This project showcases how to deploy a **FastAPI backend** and a **Worker Lambda
 - **SQS Queue**: job trigger between Lambdas.
 - **ECR + CodeBuild**: builds and hosts container images for Lambda.
 
-![architecture](./docs/architecture-diagram.png)
-
----
 
 ## 🛠️ Tech Stack
 
@@ -23,8 +19,6 @@ This project showcases how to deploy a **FastAPI backend** and a **Worker Lambda
 - **Terraform**
 - **FastAPI (Python 3.11)**
 - **AWS CodeBuild**
-
----
 
 ## 🚀 How to Deploy
 
