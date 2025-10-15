@@ -1,0 +1,25 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_TAG: "latest"
+
+phases:
+  pre_build:
+    commands:
+      - echo "Login en ECR..."
+      - aws --version
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo "Estructura del workspace:" && ls -R
+      - echo "Construyendo imagen..."
+      - docker build --no-cache -t $IMAGE_URI:$IMAGE_TAG .
+  post_build:
+    commands:
+      - echo "Pusheando imagen a ECR..."
+      - docker push $IMAGE_URI:$IMAGE_TAG
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
