@@ -35,14 +35,12 @@ This project showcases how to deploy a **FastAPI backend** and a **Worker Lambda
 
 2. Initialize Terraform:
 
-terraform init
-
+   terraform init
 
 3. Apply:
 
-terraform apply -auto-approve
-
+   terraform apply -auto-approve
 
 4. Output:
 
-terraform output
+   terraform output
