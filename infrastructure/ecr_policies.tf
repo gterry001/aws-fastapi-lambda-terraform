@@ -1,10 +1,5 @@
-##########################################
-# 🔹 ECR Repository Policies
-# These policies allow Lambda to pull images
-# for both FastAPI and Worker functions.
-##########################################
+# ECR policies
 
-# FastAPI Lambda ECR policy
 resource "aws_ecr_repository_policy" "lambda_repo_policy_a" {
   repository = "final_repo_lambda_a"
 
@@ -32,7 +27,6 @@ resource "aws_ecr_repository_policy" "lambda_repo_policy_a" {
   })
 }
 
-# Worker Lambda ECR policy
 resource "aws_ecr_repository_policy" "lambda_repo_policy_b" {
   repository = "final_repo_lambda_b"
 
@@ -60,5 +54,5 @@ resource "aws_ecr_repository_policy" "lambda_repo_policy_b" {
   })
 }
 
-# Used to retrieve the AWS account ID dynamically
+# Account ID
 data "aws_caller_identity" "current" {}
