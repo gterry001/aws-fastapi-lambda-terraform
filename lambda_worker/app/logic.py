@@ -70,7 +70,7 @@ def get_historical_klines_tv_cached(symbol, tv_symbol, exchange,
         cached_data = json.loads(obj["Body"].read().decode("utf-8"))
         cached_df = pd.DataFrame(cached_data)
         cached_df["date"] = pd.to_datetime(cached_df["date"],unit="ms").dt.date
-        print(f"📦 {symbol}: cargados {len(cached_df)} registros desde caché")
+        print(f"{symbol}: cargados {len(cached_df)} registros desde caché")
     except ClientError:
         print(f"🆕 {symbol}: sin datos previos, descargando todo")
 
@@ -99,7 +99,7 @@ def get_historical_klines_tv_cached(symbol, tv_symbol, exchange,
     df_new = tv.get_hist(symbol=tv_symbol, exchange=exchange,
                          interval=Interval.in_daily, n_bars=n_new)
     if df_new is None or df_new.empty:
-        print(f"⚠️ {symbol}: sin nuevos datos desde TradingView")
+        print(f" {symbol}: sin nuevos datos desde TradingView")
         return cached_df if not cached_df.empty else pd.DataFrame()
 
     df_new["date"] = pd.to_datetime(df_new.index)
@@ -127,7 +127,7 @@ def get_historical_klines_tv_cached(symbol, tv_symbol, exchange,
     else:
         combined = df_new.copy()
 
-    print(f"💾 {symbol}: total {len(combined)} registros tras actualización")
+    print(f" {symbol}: total {len(combined)} registros tras actualización")
 
     # 🔹 6. Guardar en S3
     s3.put_object(
@@ -136,7 +136,7 @@ def get_historical_klines_tv_cached(symbol, tv_symbol, exchange,
         Body=combined.to_json(orient="records"),
         ContentType="application/json"
     )
-    print(f"✅ {symbol}: guardado actualizado en {bucket}/{key}")
+    print(f" {symbol}: guardado actualizado en {bucket}/{key}")
 
     return combined
 
@@ -210,7 +210,7 @@ def get_historical_klines(symbol: str, start_date: float, interval: str = '1h', 
         }
         df = pd.concat([df, pd.DataFrame([last_row])], ignore_index=True)
     except Exception as e:
-        print(f"⚠️ Warning: Could not fetch current price for {symbol}: {e}")
+        print(f" Warning: Could not fetch current price for {symbol}: {e}")
 
     return df
 
@@ -303,7 +303,7 @@ def get_historical_klines_bybit(symbol: str, start_date: float, interval: str = 
             df = pd.concat([df, pd.DataFrame([last_row])], ignore_index=True)
 
     except Exception as e:
-        print(f"⚠️ Warning: Couldn't fetch current price for {symbol}: {e}")
+        print(f" Warning: Couldn't fetch current price for {symbol}: {e}")
 
     return df
 
@@ -1225,6 +1225,7 @@ def execute_trades(dfs, portfolio_table):
     
     final_check = pd.DataFrame(final_check)
     return final_check
+
 
 
 
