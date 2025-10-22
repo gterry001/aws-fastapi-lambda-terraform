@@ -1,22 +1,13 @@
-##########################################
-# 🔹 S3 Bucket
-##########################################
 resource "aws_s3_bucket" "data_v2" {
   bucket        = "fastapi-bucket-project-tfv2"
   force_destroy = true
 }
 
-##########################################
-# 🔹 SQS Queue
-##########################################
 resource "aws_sqs_queue" "jobs_v2" {
   name                       = "fastapi-sqs-tfv2"
   visibility_timeout_seconds = 900
 }
 
-##########################################
-# 🔹 Lambda A (FastAPI)
-##########################################
 resource "aws_lambda_function" "fastapi_v2" {
   function_name = "fastapi-handler-tfv2"
   package_type  = "Image"
@@ -33,9 +24,6 @@ resource "aws_lambda_function" "fastapi_v2" {
   }
 }
 
-##########################################
-# 🔹 Lambda B (Worker)
-##########################################
 resource "aws_lambda_function" "worker_v2" {
   function_name = "worker-handler-tfv2"
   package_type  = "Image"
@@ -57,7 +45,6 @@ resource "aws_lambda_function" "worker_v2" {
   }
 }
 
-# Conectar SQS -> Worker Lambda
 resource "aws_lambda_event_source_mapping" "sqs_to_lambda_v2" {
   event_source_arn = aws_sqs_queue.jobs_v2.arn
   function_name    = aws_lambda_function.worker_v2.arn
@@ -65,9 +52,6 @@ resource "aws_lambda_event_source_mapping" "sqs_to_lambda_v2" {
   enabled          = true
 }
 
-##########################################
-# 🔹 API Gateway HTTP v2
-##########################################
 resource "aws_apigatewayv2_api" "http_api_v2" {
   name          = "fastapi-http-tfv2"
   protocol_type = "HTTP"
@@ -99,7 +83,6 @@ resource "aws_apigatewayv2_stage" "default_v2" {
   auto_deploy = true
 }
 
-# Permitir que API Gateway invoque la Lambda FastAPI
 resource "aws_lambda_permission" "api_gw_invoke_v2" {
   statement_id  = "AllowAPIGatewayInvokeV2"
   action        = "lambda:InvokeFunction"
